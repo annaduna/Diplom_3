@@ -1,7 +1,7 @@
 import allure
 from pages.base_page import BasePage
-from helpers.locators import RecoveryPasswordPageLocators
-from helpers.curl import urls
+from locators import RecoveryPasswordPageLocators
+from curl import urls
 
 
 class RecoveryPasswordPage(BasePage):
@@ -11,12 +11,12 @@ class RecoveryPasswordPage(BasePage):
 
     @allure.step('Вводим email и нажимаем на кнопку Восстановить.')
     def input_email_and_click_recovery_button(self):
-        self.find_element_on_page(RecoveryPasswordPageLocators.input_email).send_keys('test@test.ru')
-        self.click_on_element(RecoveryPasswordPageLocators.recovery_button)
-        self.wait_visibility_of_element(RecoveryPasswordPageLocators.save_button)
+        self.find_element_on_page(RecoveryPasswordPageLocators.INPUT_EMAIL).send_keys('test@test.ru')
+        self.click_on_element(RecoveryPasswordPageLocators.RECOVERY_BUTTON)
+        self.wait_visibility_of_element(RecoveryPasswordPageLocators.SAVE_BUTTON)
 
     @allure.step('Нажимаем на кнопку Показать/Скрыть пароль и проверяем что поле Пароль в фокусе.')
     def click_on_hide_show_password_button_and_check_field_focused(self):
-        self.find_element_on_page(RecoveryPasswordPageLocators.password_hide_show_button)
-        self.click_on_element(RecoveryPasswordPageLocators.password_hide_show_button)
-        return self.check_element_is_focused(RecoveryPasswordPageLocators.password_field)
+        self.find_element_on_page(RecoveryPasswordPageLocators.PASSWORD_HIDE_SHOW_BUTTON)
+        self.click_on_element(RecoveryPasswordPageLocators.PASSWORD_HIDE_SHOW_BUTTON)
+        return self.check_element_is_focused(RecoveryPasswordPageLocators.PASSWORD_FIELD)

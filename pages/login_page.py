@@ -1,8 +1,7 @@
 import allure
-from helpers.locators import LoginPageLocators, RecoveryPasswordPageLocators
-from helpers.curl import urls
+from locators import LoginPageLocators, RecoveryPasswordPageLocators
+from curl import urls
 from pages.base_page import BasePage
-
 
 class LoginPage(BasePage):
 
@@ -12,5 +11,5 @@ class LoginPage(BasePage):
 
     @allure.step('Нажимаем на кнопку Восстановить пароль.')
     def click_on_recovery_password_button(self):
-        self.scroll_and_click_on_element(LoginPageLocators.recovery_password_button)
-        self.wait_visibility_of_element(RecoveryPasswordPageLocators.recovery_password_page_title)
+        self.scroll_and_click_on_element(LoginPageLocators.RECOVERY_PASSWORD_BUTTON)
+        self.wait_visibility_of_element(RecoveryPasswordPageLocators.RECOVERY_PASSWORD_PAGE_TITLE)

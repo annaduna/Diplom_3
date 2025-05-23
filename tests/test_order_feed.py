@@ -1,7 +1,7 @@
 import allure
-from helpers.api import ApiMethods
-from helpers.data import Ingredient
-from helpers.locators import OrderFeedPageLocators
+from api import ApiMethods
+from data import Ingredient
+from locators import OrderFeedPageLocators
 from pages.order_feed_page import OrderFeedPage
 
 
@@ -10,22 +10,22 @@ class TestOrderFeed:
     @allure.title('Получение деталей заказа из Лента заказов.')
     def test_click_on_order_from_feed(self, browser):
         page = OrderFeedPage(browser)
-        assert page.get_order_details_by_clicking_on_order_in_feed(OrderFeedPageLocators.order_in_feed)
+        assert page.get_order_details_by_clicking_on_order_in_feed(OrderFeedPageLocators.ORDER_IN_FEED)
 
     @allure.title('Проверка счётчика Выполнено за всё время.')
     def test_check_all_completed_orders_counter(self, browser, register):
         page = OrderFeedPage(browser)
-        count_before = int(page.get_element_text(OrderFeedPageLocators.all_orders_counter))
+        count_before = int(page.get_element_text(OrderFeedPageLocators.ALL_ORDERS_COUNTER))
         ApiMethods.create_order(register[0], register[1], Ingredient.list_of_ingredients)
-        count_after = int(page.get_element_text(OrderFeedPageLocators.all_orders_counter))
+        count_after = int(page.get_element_text(OrderFeedPageLocators.ALL_ORDERS_COUNTER))
         assert count_after > count_before
 
-    @allure.title('Проверка счётчика Выполнено за сегодня.')
+    @allure.title('при создании нового заказа счётчик Выполнено за сегодня увеличивается')
     def test_check_today_completed_orders_counter(self, browser, register):
         page = OrderFeedPage(browser)
-        count_before = int(page.get_element_text(OrderFeedPageLocators.today_orders_counter))
+        count_before = int(page.get_element_text(OrderFeedPageLocators.TODAY_ORDERS_COUNTER))
         ApiMethods.create_order(register[0], register[1], Ingredient.list_of_ingredients)
-        count_after = int(page.get_element_text(OrderFeedPageLocators.today_orders_counter))
+        count_after = int(page.get_element_text(OrderFeedPageLocators.TODAY_ORDERS_COUNTER))
         assert count_after > count_before
 
     @allure.title('Проверка номера оформленного заказа в разделе В работе.')

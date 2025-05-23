@@ -2,9 +2,9 @@ import allure
 import requests
 import random
 import string
-from helpers.api import ApiMethods
-from helpers.data import Ingredient
-from helpers.curl import urls
+from api import ApiMethods
+from data import Ingredient
+from curl import urls
 
 @allure.step('Регистрируем нового пользователя.')
 def register_new_user_and_return_login_password():
@@ -15,8 +15,8 @@ def register_new_user_and_return_login_password():
 
     login_pass = []
 
-    email = generate_random_string(10)+'@mail.com'
-    password = generate_random_string(10)
+    email = generate_random_string(10)+'@gmail.com'
+    password = generate_random_string(8)
     name = generate_random_string(10)
 
     payload = {

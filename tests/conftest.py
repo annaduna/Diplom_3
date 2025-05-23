@@ -1,13 +1,10 @@
 import pytest
-from helpers.api import ApiMethods
-from helpers.data import Ingredient
-from helpers.utils import register_new_user_and_return_login_password, register_new_user_and_order
+from api import ApiMethods
+from data import Ingredient
+from methods import register_new_user_and_return_login_password, register_new_user_and_order
 from selenium import webdriver
 
-
-
 class WebdriverFactory:
-
     @staticmethod
     def getWebdriver(browserName):
         if browserName == "firefox":

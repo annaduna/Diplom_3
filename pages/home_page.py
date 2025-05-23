@@ -1,5 +1,5 @@
 from pages.base_page import BasePage
-from helpers.curl import urls
+from curl import urls
 
 
 class HomePage(BasePage):
