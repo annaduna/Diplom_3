@@ -46,7 +46,8 @@ class TestBasicFunctionality:
     def test_check_order_creation(self, browser, register):
         page = PersonalAccountPage(browser)
         page.open_url(urls.HOME_PAGE_URL)
-        page.do_login(register[0], register[1])
+        # page.do_login(register[0], register[1])
+        page.do_login() # исправленный код
         page.drag_and_drop_element(browser, HomePageLocators.BUN_INGREDIENT, HomePageLocators.BASKET)
         page.click_on_element(HomePageLocators.PLACE_ORDER_BUTTON)
         assert page.wait_visibility_of_element(HomePageLocators.ACTIVE_ORDER_LABEL)

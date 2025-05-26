@@ -1,5 +1,7 @@
 import allure
 import time
+
+import data
 from locators import PersonalAccountPageLocators
 from curl import urls
 from pages.base_page import BasePage
@@ -8,6 +10,7 @@ from pages.base_page import BasePage
 class PersonalAccountPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
+        self.driver.get(urls.HOME_PAGE_URL)
 
     @allure.step('Нажимаем на кнопку Личный кабинет и переходим на страницу авторизации.')
     def click_on_personal_account_button(self):
@@ -20,8 +23,10 @@ class PersonalAccountPage(BasePage):
         self.wait_clickability_of_element(PersonalAccountPageLocators.PERSONAL_ACCOUNT_BUTTON)
         self.click_on_element(PersonalAccountPageLocators.PERSONAL_ACCOUNT_BUTTON)
         self.wait_visibility_of_element(PersonalAccountPageLocators.ENTRANCE_LABEL)
-        self.find_element_on_page(PersonalAccountPageLocators.EMAIL_FIELD).send_keys(email)
-        self.find_element_on_page(PersonalAccountPageLocators.PASSWORD_FIELD).send_keys(password)
+        # self.find_element_on_page(PersonalAccountPageLocators.EMAIL_FIELD).send_keys(email)
+        self.send_keys_to_input(PersonalAccountPageLocators.EMAIL_FIELD, data.DataForUser.user[email]) # измененный код
+        # self.find_element_on_page(PersonalAccountPageLocators.PASSWORD_FIELD).send_keys(password)
+        self.send_keys_to_input(PersonalAccountPageLocators.PASSWORD_FIELD,data.DataForUser.user[password]) # измененный код
         self.click_on_element(PersonalAccountPageLocators.ENTRANCE_BUTTON)
 
     @allure.step('Нажимаем на кнопку Личный кабинет и переходим на страницу Профиль пользователя.')

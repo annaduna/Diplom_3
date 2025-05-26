@@ -11,7 +11,8 @@ class RecoveryPasswordPage(BasePage):
 
     @allure.step('Вводим email и нажимаем на кнопку Восстановить.')
     def input_email_and_click_recovery_button(self):
-        self.find_element_on_page(RecoveryPasswordPageLocators.INPUT_EMAIL).send_keys('test@test.ru')
+        self.check_element_is_focused(RecoveryPasswordPageLocators.INPUT_EMAIL)
+        self.send_keys_to_input(RecoveryPasswordPageLocators.INPUT_EMAIL,'test@test.ru')
         self.click_on_element(RecoveryPasswordPageLocators.RECOVERY_BUTTON)
         self.wait_visibility_of_element(RecoveryPasswordPageLocators.SAVE_BUTTON)
 

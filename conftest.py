@@ -11,17 +11,17 @@ class WebdriverFactory:
             return webdriver.Firefox()
         elif browserName == "chrome":
             return webdriver.Chrome()
-        else:
-            raise ValueError(f"Unsupported browser: {browserName}")
+        # else:
+        #     raise ValueError(f"Unsupported browser: {browserName}")
 
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="chrome", help="Browser to run tests on")
 
 @pytest.fixture
 def browser(request):
-    browser_name = request.config.getoption("--browser")  # Получаем значение из --browser
-    driver = WebdriverFactory.getWebdriver(browser_name)  # Создаем WebDriver
-    yield driver  # Передаем WebDriver в тест
+    browser_name = request.config.getoption("--browser")
+    driver = WebdriverFactory.getWebdriver(browser_name)
+    yield driver
     driver.quit()
 
 @pytest.fixture

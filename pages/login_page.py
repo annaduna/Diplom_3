@@ -13,3 +13,4 @@ class LoginPage(BasePage):
     def click_on_recovery_password_button(self):
         self.scroll_and_click_on_element(LoginPageLocators.RECOVERY_PASSWORD_BUTTON)
         self.wait_visibility_of_element(RecoveryPasswordPageLocators.RECOVERY_PASSWORD_PAGE_TITLE)
+
