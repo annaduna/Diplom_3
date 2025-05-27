@@ -1,12 +1,16 @@
 import allure
+from selenium.webdriver import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
-from conftest import browser
 
 class BasePage:
     def __init__(self, driver):
         self.driver = driver
+
+    @allure.step('Ждем пока элемент станет невидимым')
+    def wait_for_element_hide(self, locator):
+        WebDriverWait(self.driver, 5).until(EC.invisibility_of_element_located(locator))
+        return self.driver.find_element(*locator)
 
     @allure.step('Открываем страницу {url}')
     def open_url(self, url):
@@ -51,46 +55,9 @@ class BasePage:
         self.wait_visibility_of_element(locator)
         return self.find_element_on_page(locator).text
 
-    @allure.step('Перетаскиваем элемент.')
-    def drag_and_drop_element(self, dry, element_from, element_to):
-        if browser == 'chrome':
-            from_element = self.driver.find_element(*element_from)
-            to_element = self.driver.find_element(*element_to)
-            action = ActionChains(dry)
-            action.drag_and_drop(from_element, to_element).perform()
-            return action.drag_and_drop(from_element, to_element).perform()
-        source_element = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(element_from))
-        target_element = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(element_to))
-        self.driver.execute_script(
-            "function createEvent(typeOfEvent) { " +
-            "var event = document.createEvent('CustomEvent'); " +
-            "event.initCustomEvent(typeOfEvent, true, true, null); " +
-            "event.dataTransfer = { " +
-            "data: {}, " +
-            "setData: function(key, value) { this.data[key] = value; }, " +
-            "getData: function(key) { return this.data[key]; } " +
-            "}; " +
-            "return event; " +
-            "} " +
-            "function dispatchEvent(element, typeOfEvent, event) { " +
-            "if (element.dispatchEvent) { " +
-            "element.dispatchEvent(event); " +
-            "} else if (element.fireEvent) { " +
-            "element.fireEvent('on' + typeOfEvent, event); " +
-            "} " +
-            "} " +
-            "function simulateHTML5DragAndDrop(element, destination) { " +
-            "var dragStartEvent = createEvent('dragstart'); " +
-            "dispatchEvent(element, 'dragstart', dragStartEvent); " +
-            "var dropEvent = createEvent('drop'); " +
-            "dispatchEvent(destination, 'drop', dropEvent); " +
-            "var dragEndEvent = createEvent('dragend'); " +
-            "dispatchEvent(element, 'dragend', dragEndEvent); " +
-            "} " +
-            "simulateHTML5DragAndDrop(arguments[0], arguments[1]);",
-            source_element,
-            target_element
-        )
+    @allure.step('Перетащить элемент')
+    def drag_and_drop_element(self, source_element, target_element):
+        ActionChains(self.driver).drag_and_drop(source_element, target_element).pause(5).perform()
 
     @allure.step('Ожидаем отображения элемента на странице')
     def wait_visibility_of_element(self, locator):

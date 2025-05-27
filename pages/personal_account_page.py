@@ -1,6 +1,5 @@
 import allure
 import time
-
 import data
 from locators import PersonalAccountPageLocators
 from curl import urls
