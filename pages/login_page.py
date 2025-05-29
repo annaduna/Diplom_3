@@ -7,7 +7,7 @@ class LoginPage(BasePage):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.driver.get(urls.LOGIN_PAGE_URL)
+        self.open_url(urls.LOGIN_PAGE_URL)
 
     @allure.step('Нажимаем на кнопку Восстановить пароль.')
     def click_on_recovery_password_button(self):

@@ -1,15 +1,14 @@
 import allure
 import time
 import data
-from locators import PersonalAccountPageLocators
+from locators import PersonalAccountPageLocators, HomePageLocators
 from curl import urls
 from pages.base_page import BasePage
-
 
 class PersonalAccountPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
-        self.driver.get(urls.HOME_PAGE_URL)
+        self.open_url(urls.HOME_PAGE_URL)
 
     @allure.step('Нажимаем на кнопку Личный кабинет и переходим на страницу авторизации.')
     def click_on_personal_account_button(self):
@@ -22,10 +21,8 @@ class PersonalAccountPage(BasePage):
         self.wait_clickability_of_element(PersonalAccountPageLocators.PERSONAL_ACCOUNT_BUTTON)
         self.click_on_element(PersonalAccountPageLocators.PERSONAL_ACCOUNT_BUTTON)
         self.wait_visibility_of_element(PersonalAccountPageLocators.ENTRANCE_LABEL)
-        # self.find_element_on_page(PersonalAccountPageLocators.EMAIL_FIELD).send_keys(email)
-        self.send_keys_to_input(PersonalAccountPageLocators.EMAIL_FIELD, data.DataForUser.user[email]) # измененный код
-        # self.find_element_on_page(PersonalAccountPageLocators.PASSWORD_FIELD).send_keys(password)
-        self.send_keys_to_input(PersonalAccountPageLocators.PASSWORD_FIELD,data.DataForUser.user[password]) # измененный код
+        self.send_keys_to_input(PersonalAccountPageLocators.EMAIL_FIELD, data.DataForUser.user[email])
+        self.send_keys_to_input(PersonalAccountPageLocators.PASSWORD_FIELD,data.DataForUser.user[password])
         self.click_on_element(PersonalAccountPageLocators.ENTRANCE_BUTTON)
 
     @allure.step('Нажимаем на кнопку Личный кабинет и переходим на страницу Профиль пользователя.')
@@ -51,3 +48,28 @@ class PersonalAccountPage(BasePage):
     def do_logout(self):
         self.click_on_element(PersonalAccountPageLocators.EXIT_BUTTON)
         self.wait_visibility_of_element(PersonalAccountPageLocators.ENTRANCE_LABEL)
+
+    @allure.step('Кликаем на кнопку Личный кабинет.')
+    def go_to_personal_account(self):
+        self.click_on_element(PersonalAccountPageLocators.PERSONAL_ACCOUNT_BUTTON)
+
+    @allure.step('Переходим в раздел История заказов.')
+    def go_to_order_history(self):
+        self.click_on_element(PersonalAccountPageLocators.ORDER_HISTORY_BUTTON)
+
+    @allure.step('Выходим из личного кабинета.')
+    def logout(self):
+        self.click_on_element(PersonalAccountPageLocators.EXIT_BUTTON)
+
+    @allure.step('открыть юрл')
+    def open_url(self):
+        self.open_url(urls.HOME_PAGE_URL)
+
+    @allure.step('Создаем заказ, добавляя ингредиент в корзину и оформляя заказ.')
+    def create_order(self):
+        self.drag_and_drop_element(HomePageLocators.BUN_INGREDIENT, HomePageLocators.BASKET)
+        self.click_on_element(HomePageLocators.ACTIVE_ORDER_LABEL)
+
+    @allure.step('Проверяем, что заказ был успешно создан.')
+    def is_order_created(self):
+        return self.wait_visibility_of_element(HomePageLocators.ACTIVE_ORDER_LABEL)

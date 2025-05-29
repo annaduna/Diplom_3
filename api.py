@@ -2,7 +2,6 @@ import allure
 import requests
 from curl import urls
 
-
 class ApiMethods:
 
     @staticmethod

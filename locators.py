@@ -12,7 +12,6 @@ class HomePageLocators:
     PLACE_ORDER_BUTTON = (By.XPATH, ".//button[text()='Оформить заказ']")
     ACTIVE_ORDER_LABEL = (By.XPATH, ".//p[text()='Ваш заказ начали готовить']")
 
-
 class OrderFeedPageLocators:
     ORDER_FEED_LABEL = (By.XPATH, ".//h1[text()='Лента Заказов']")
     ORDER = (By.XPATH, ".//li[@class='OrderHistory_listItem__2x95r mb-6']")
@@ -23,11 +22,9 @@ class OrderFeedPageLocators:
     ORDER_IN_WORK = (By.XPATH, ".//ul[@class='OrderFeed_orderListReady__1YFem OrderFeed_orderList__cBvyi']")
     COMPLETED_ORDERS = (By.XPATH, ".//ul[@class='OrderFeed_orderList__cBvyi']")
 
-
 class LoginPageLocators:
     LOGIN_PAGE_TITLE = (By.XPATH, "//div[@class='Auth_login__3hAey']")
     RECOVERY_PASSWORD_BUTTON = (By.XPATH, ".//a[text()='Восстановить пароль']")
-
 
 class PersonalAccountPageLocators:
     PERSONAL_ACCOUNT_BUTTON = (By.XPATH, ".//p[text()='Личный Кабинет']")
@@ -39,7 +36,6 @@ class PersonalAccountPageLocators:
     ORDER_IN_ACCOUNT = (By.XPATH, ".//p[@class='text text_type_digits-default']")
     ENTRANCE_BUTTON = (By.XPATH, ".//button[text()='Войти']")
     EXIT_BUTTON = (By.XPATH, ".//button[text()='Выход']")
-
 
 class RecoveryPasswordPageLocators:
     RECOVERY_PASSWORD_PAGE_TITLE = (By.XPATH, "//div[@class='Auth_login__3hAey']")
