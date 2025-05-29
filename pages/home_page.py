@@ -6,8 +6,8 @@ from curl import urls
 
 class HomePage(BasePage):
 
-    def __init__(self, driver):
-        super().__init__(driver)
+    def __init__(self):
+        super().__init__()
         self.open_url(urls.HOME_PAGE_URL)
 
     @allure.step('Кликаем на кнопку Конструктор.')

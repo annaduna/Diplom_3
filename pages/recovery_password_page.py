@@ -4,8 +4,8 @@ from locators import RecoveryPasswordPageLocators
 from curl import urls
 
 class RecoveryPasswordPage(BasePage):
-    def __init__(self, driver):
-        super().__init__(driver)
+    def __init__(self):
+        super().__init__()
         self.open_url(urls.FORGOT_PASSWORD_PAGE_URL)
 
     @allure.step('Вводим email и нажимаем на кнопку Восстановить.')

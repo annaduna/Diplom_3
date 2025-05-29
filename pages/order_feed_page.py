@@ -7,8 +7,8 @@ from selenium.webdriver.common.by import By
 
 class OrderFeedPage(PersonalAccountPage):
 
-    def __init__(self, driver):
-        super().__init__(driver)
+    def __init__(self):
+        super().__init__()
         self.driver.get(urls.ORDER_FEED_URL)
 
     @allure.step('Нажимаем на заказ, получаем открытое окно с заказом.')
