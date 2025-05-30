@@ -41,3 +41,7 @@ class HomePage(BasePage):
     @allure.step('Перетаскиваем ингредиент в корзину')
     def drag_and_drop_ingredient_to_basket(self):
         self.drag_and_drop_element(HomePageLocators.BUN_INGREDIENT, HomePageLocators.BASKET)
+
+    @allure.step('Получаем текст окна деталей ингредиента')
+    def get_ingredient_details_text(self):
+        return self.get_element_text(HomePageLocators.CARD_INGREDIENT_LABEL)

@@ -1,4 +1,6 @@
 import allure
+
+import data
 from curl import urls
 from locators import HomePageLocators
 from pages.home_page import HomePage
@@ -23,7 +25,7 @@ class TestBasicFunctionality:
     def test_click_on_ingredient(self):
         page = HomePage()
         page.click_on_ingredient()
-        assert "Детали ингредиента" == page.get_element_text(HomePageLocators.CARD_INGREDIENT_LABEL)
+        assert data.DataForUI.INGREDIENT_DETAILS_LABEL == page.get_ingredient_details_text()
 
     @allure.title('всплывающее окно закрывается кликом по крестику')
     def test_exit_from_ingredient_card(self):
@@ -48,3 +50,5 @@ class TestBasicFunctionality:
         page.do_login()
         page.create_order()
         assert page.is_order_created()
+
+

@@ -9,7 +9,7 @@ class OrderFeedPage(PersonalAccountPage):
 
     def __init__(self):
         super().__init__()
-        self.driver.get(urls.ORDER_FEED_URL)
+        self.open_url(urls.ORDER_FEED_URL)
 
     @allure.step('Нажимаем на заказ, получаем открытое окно с заказом.')
     def get_order_details_by_clicking_on_order_in_feed(self, locator):

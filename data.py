@@ -7,3 +7,6 @@ class DataForUser:
         "password":"123654",
         "name":"Nikita"
     }
+
+class DataForUI:
+    INGREDIENT_DETAILS_LABEL = "Детали ингредиента"
